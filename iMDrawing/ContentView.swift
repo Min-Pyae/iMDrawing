@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var selectedColor: Color = .black
     @State private var selectedLineWidth: CGFloat = 1
     
+    @State private var showConfirmation: Bool = false
+    
     var body: some View {
         
         VStack {
@@ -38,6 +40,7 @@ struct ContentView: View {
                     
                 }, label: {
                     Image(systemName: "arrow.uturn.backward.circle")
+                        .imageScale(.large)
                 })
                 
                 
@@ -46,15 +49,22 @@ struct ContentView: View {
                     
                 }, label: {
                     Image(systemName: "arrow.uturn.forward.circle")
+                        .imageScale(.large)
                 })
                 
                 
                 // CLEAR ALL BUTTON
                 Button(action: {
-                    
+                    showConfirmation = true
                 }, label: {
-                    Text("Clear All")
+                    Text("Clear")
+                        .foregroundStyle(.red)
                 })
+                .confirmationDialog("Are you sure that you want to clear everything?", isPresented: $showConfirmation) {
+                    Button("Clear", role: .destructive) {
+                        
+                    }
+                }
             }
             
             // CANVAS
